@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Discussion</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        div {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .message-author {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .message-content {
+            margin-top: 10px;
+        }
+
+        .reply-button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .reply-button:hover {
+            background-color: #45a049;
+        }
+
+        .add-reply {
+            background-color: unset;
+            max-width: 900px;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <h1 th:text="${discussion.title}"></h1>
+    <h3 th:text="${discussion.getContext()}"></h3>
+
+    <div th:each="comment : ${discussionComments}" class="message">
+        <p class="message-author" th:text="${comment.user.getUsername()}"></p>
+        <p class="message-content" th:text="${comment.commentText}"></p>
+
+        <a th:href="@{'/discussion/deleteComment/' + ${discussion.id}}" th:if="${admin}">
+            <i class="fas fa-trash-alt" style="color: red;"></i>
+        </a>
+
+     </div>
+
+     <div class="add-reply" th:if="${activateReply}">
+         <form th:action="@{'/discussion/' + ${discussion.id} + '/reply'}" method="post">
+             <textarea name="replyContent" rows="4" cols="50" placeholder="Type your reply here..." required></textarea>
+             <button type="submit" class="reply-button">Reply</button>
+         </form>
+     </div>
+ </div>
+
+ </body>
+ </html>

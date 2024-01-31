@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Dashboard</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        div {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        div th {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            width: auto;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .titles {
+            max-width: 900px;
+            width: 100%;
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .plus-icon {
+            font-size: 24px;
+            color: green;
+            margin-right: 10px;
+            padding-bottom: 20px;
+            margin-left: -470px;
+        }
+
+        .dashboard {
+            display: block;
+        }
+    </style>
+
+    <script>
+        function openAddDiscussionOverlay() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+
+<div id="dashboard">
+    <h1>Pregled tema</h1>
+    <h3 th:if="${not #strings.isEmpty(message)}" th:text="${message}"></h3>
+    <h3 th:unless="${not #strings.isEmpty(message)}">You are a guest. If you want to participate in the discussions, you
+        will need to <a href="/login">Login</a> first.</h3>
+
+    <a onclick="openAddDiscussionOverlay()" th:if="${admin}">
+        <i class="fas fa-plus-circle plus-icon"></i>
+    </a>
+    <div class="titles" th:each="discussion : ${discussions}">
+        <a th:href="@{'/discussion/' + ${discussion.id}}" target="_blank">
+            <p th:text="${discussion.title}"></p>
+        </a>
+
+        <a th:href="@{'/discussion/delete/' + ${discussion.id}}" th:if="${admin}">
+            <i class="fas fa-trash-alt" style="color: red;"></i>
+        </a>
+    </div>
+</div>
+
+<div th:replace="addDiscussionOverlay.html"></div>
+</body>
+</html>
