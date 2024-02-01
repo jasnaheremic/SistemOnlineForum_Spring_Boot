@@ -5,7 +5,7 @@ Login administator
 Username: admin
 Password: admin
 
-Login user
+Login user/b
 Username: test_user
 Password: password
 
