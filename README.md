@@ -1,11 +1,11 @@
 Aplikacija pravljena pomoću Spring Boot-a, Intellij i MySql baze podataka. SQL dump se nalazi u db_280.sql fajlu
 Potrebno je napraviti bazu podataka u MySql koristeći komande iz db_280.sql
 
-Login administator
+*Login administator*
 Username: admin
 Password: admin
 
-Login user/b
+*Login user*
 Username: test_user
 Password: password
 
