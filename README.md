@@ -15,3 +15,5 @@ dodaje nove komentare. User/Korsnik može da pregleda i dodaje komentare na disk
 Kada korisnik nema račun može da se registruje samo kao user ili da pregleda diskusija kao gost,
 bez mogućnosti dodavanja komentara. Prilikom registracije, unosi svoje lične podatke i može se 
 registrovati samo ako ima jedinstveni username.
+
+(*Web aplikacija napravljena kao projektni zadatak za fakultet*)
